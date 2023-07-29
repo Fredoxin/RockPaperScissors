@@ -1,10 +1,10 @@
 
 
-        function randomSelection() {
-            const options = ["rock", "paper", "scissor"];
+      function randomSelection() {
+            const options = ["rock", "paper", "scissors"];
             const result = Math.floor(Math.random() * options.length);
-            return options[result];
-        }
+            return options[result]
+          }
         
       
 
@@ -21,36 +21,44 @@
                         return "Its a draw, no points";
                     }
                     else if (cpuChoice == "paper") {
+                        console.log("CPU chose paper");
                         cpuScore++;
                         return "Paper beats rock, you lose!";
                     }   
-                    else if (cpuChoice == "scissor") {
+                    else if (cpuChoice == "scissors") {
+                        console.log("CPU chose scissors");
                         playersScore++;
-                        return "rock beats scissor, you WIN!";
+                        return "Rock beats scissors, you WIN!";
                     }
 
                 } else if( playersChoice == "paper") {
                     if (cpuChoice == "rock") {
+                        console.log("CPU chose rock")
                         playersScore++;
-                        return "Paper beats roch, you win!";
+                        return "Paper beats rock, you win!";
                     }
                     else if (cpuChoice == "paper") {
+                        console.log("CPU chose paper")
                         return "Its a draw!";
                     }
                     else if (cpuChoice == "scissor") {
+                        console.log("CPU chose scissors")
                         cpuScore++;
                         return "Scissor beats paper, CPU wins!";
                     }
-                } else if (playersChoice == "scissor") {
+                } else if (playersChoice == "scissors") {
                     if (cpuChoice == "rock") {
+                        console.log("CPU chose rock")
                         cpuScore++;
-                        return "rock beats scissor, you lose!";
+                        return "Rock beats scissors, you lose!";
                     }
                     else if (cpuChoice == "paper") {
+                        console.log("CPU chose paper")
                         playersScore++;
                         return "Scissor beats paper, you win!";
                     }
-                    else if (cpuChoice == "scissor") {
+                    else if (cpuChoice == "scissors") {
+                        console.log("CPU chose scissors")
                         return "Scissors, its a draw!";
                     }
                 }
@@ -67,9 +75,9 @@
         i = 0;
         while (i < 5) {
 
-        let userInput = prompt("Enter rock, paper or scissor")
+        let userInput = prompt("Enter rock, paper or scissors")
         userInput = userInput.toLowerCase()
-        if (userInput != "rock" && userInput != "paper" && userInput != "scissor") {
+        if (userInput != "rock" && userInput != "paper" && userInput != "scissors") {
             alert("invalid Input - Enter rock, paper or scissor")
         } else {
         console.log(playRound(userInput, cpuChoice = randomSelection())) 
