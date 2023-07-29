@@ -67,12 +67,12 @@
 
         let playersScore = 0;
         let cpuScore = 0;
-       
+        i = 0;
         
 
 
        window.onload = function game()   {
-        i = 0;
+        
         while (i < 5) {
 
         let userInput = prompt("Enter rock, paper or scissors")
@@ -82,7 +82,7 @@
         } else {
         console.log(playRound(userInput, cpuChoice = randomSelection())) 
         i++ }
-        } 
+        }
 
     
         if(cpuScore < playersScore) {
