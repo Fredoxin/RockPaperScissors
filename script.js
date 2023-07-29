@@ -52,7 +52,7 @@
                     }
                     else if (cpuChoice == "scissor") {
                         return "Scissors, its a draw!";
-                    };
+                    }
                 }
                 
         }
@@ -63,7 +63,7 @@
         
 
 
-       function game()   {
+       window.onload = function game()   {
         i = 0;
         while (i < 5) {
 
