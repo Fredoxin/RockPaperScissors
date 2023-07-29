@@ -1,2 +1,2 @@
 # RockPaperScissors
-a wonderful game
+This is a OdinProject exercise
