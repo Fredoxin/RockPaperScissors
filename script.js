@@ -11,9 +11,9 @@
         
 
         const playRound = function playRound (playersChoice = userInput, cpuChoice = randomSelection()) { 
-            
+            userInput = prompt("Enter rock, paper or scissors")
             playersChoice = playersChoice.toLowerCase()
-            
+            alert("YES")
               if (playersChoice == "rock") {
                     console.log("You chose rock")
                     if (cpuChoice == "rock") {
@@ -65,7 +65,7 @@
                 
         }
 
-        let playersScore = 0;
+       /* let playersScore = 0;
         let cpuScore = 0;
         i = 0;
         
@@ -80,7 +80,7 @@
         if (userInput != "rock" && userInput != "paper" && userInput != "scissors") {
             alert("invalid Input - Enter rock, paper or scissor")
         } else {
-        console.log(playRound(userInput, cpuChoice = randomSelection())) 
+        console.log(playRound(userInput, cpuChoice = randomSelection())) §
         i++ }
         }
 
@@ -92,6 +92,20 @@
             alert("CPU wins");
          } else {alert("It is a draw")}
 
-     }
+     } */
         
      
+
+
+/////////////////////////
+///////Events////////////
+////////////////////////
+
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button  => {
+    
+    button.addEventListener("click", playRound)
+
+})
