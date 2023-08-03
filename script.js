@@ -1,60 +1,61 @@
-
-
-      function randomSelection() {
+        const cpuChoice = function randomSelection() {
             const options = ["rock", "paper", "scissors"];
             const result = Math.floor(Math.random() * options.length);
             return options[result]
           }
-        
+      
+      
       
 
         
 
-        const playRound = function playRound (playersChoice = userInput, cpuChoice = randomSelection()) { 
-            userInput = prompt("Enter rock, paper or scissors")
-            playersChoice = playersChoice.toLowerCase()
-            alert("YES")
-              if (playersChoice == "rock") {
+        const playRound = function playRound (playersChoice, cpuChoice) { 
+            //userInput = prompt("Enter rock, paper or scissors")
+           //playersChoice = playersChoice.toLowerCase()
+          //console.log(cpuChoice())
+              if (playersChoice == "Rock") {
                     console.log("You chose rock")
                     if (cpuChoice == "rock") {
                         console.log("CPU chose rock");
-                        return "Its a draw, no points";
+                        return("Its a draw, no points");
                     }
                     else if (cpuChoice == "paper") {
                         console.log("CPU chose paper");
-                        cpuScore++;
+                     //   cpuScore++;
                         return "Paper beats rock, you lose!";
                     }   
                     else if (cpuChoice == "scissors") {
                         console.log("CPU chose scissors");
-                        playersScore++;
+                      //  playersScore++;
                         return "Rock beats scissors, you WIN!";
                     }
 
-                } else if( playersChoice == "paper") {
+                } else if( playersChoice == "Paper") {
+                    console.log("You chose paper")
                     if (cpuChoice == "rock") {
                         console.log("CPU chose rock")
-                        playersScore++;
+                     //   playersScore++;
                         return "Paper beats rock, you win!";
                     }
                     else if (cpuChoice == "paper") {
                         console.log("CPU chose paper")
                         return "Its a draw!";
                     }
-                    else if (cpuChoice == "scissor") {
+                    else if (cpuChoice == "scissors") {
                         console.log("CPU chose scissors")
-                        cpuScore++;
+                       // cpuScore++;
                         return "Scissor beats paper, CPU wins!";
                     }
-                } else if (playersChoice == "scissors") {
+                } else if (playersChoice == "Scissors") {
+                    console.log("You chose scissors")
                     if (cpuChoice == "rock") {
                         console.log("CPU chose rock")
-                        cpuScore++;
+                       // cpuScore++;
                         return "Rock beats scissors, you lose!";
                     }
                     else if (cpuChoice == "paper") {
                         console.log("CPU chose paper")
-                        playersScore++;
+                       // playersScore++;
                         return "Scissor beats paper, you win!";
                     }
                     else if (cpuChoice == "scissors") {
@@ -64,6 +65,50 @@
                 }
                 
         }
+
+        
+     
+
+
+/////////////////////////
+///////Events////////////
+////////////////////////
+
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+    button.addEventListener("click",() => {
+        const playersChoice = button.value;
+        const result = playRound(playersChoice, cpuChoice())
+       // console.log(playRound(playersChoice, cpuChoice()))
+        console.log(result)
+        
+    });
+})
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
        /* let playersScore = 0;
         let cpuScore = 0;
@@ -93,19 +138,3 @@
          } else {alert("It is a draw")}
 
      } */
-        
-     
-
-
-/////////////////////////
-///////Events////////////
-////////////////////////
-
-
-const buttons = document.querySelectorAll("button");
-
-buttons.forEach(button  => {
-    
-    button.addEventListener("click", playRound)
-
-})
