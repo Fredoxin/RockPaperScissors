@@ -6,17 +6,19 @@ let announcement = document.querySelector(".announcement");
 ///FUNCTION EXPRESSION I USE FOR THE GAME////   
 
 const gameEnd = function () {
-
+    let announcement = document.querySelector(".announcement");
     if (playerScore == 5) {
         setTimeout(()=>{
+            console.log("gameEndWON")
             announcement.textContent = "YOU WON THE GAME";
-        }, 1000)
+        }, 0)
     }  else if (cpuScore == 5) {
         setTimeout(()=>{
+            console.log("gameEndLOST")
             announcement.textContent = "YOU LOST THE GAME";
-        }, 1000)
+        }, 0)
     }
-}
+};
         
 const cpuChoice = function () {
     const options = ["rock", "paper", "scissors"];
@@ -29,16 +31,21 @@ const updatePlayerScore = function () {
         const scoreBoardPlayer = document.querySelector(".playerScoreBoard .score");
         playerScore++;
         scoreBoardPlayer.textContent = `${playerScore}`;
+        if (playerScore == 5 || cpuScore == 5) {
+            gameEnd();
+            } 
          };
 
 const updateCpuScore = function () {
         const scoreBoardPlayer = document.querySelector(".cpuScoreBoard .score");
         cpuScore++;
         scoreBoardPlayer.textContent = `${cpuScore}`;
-
+        if (playerScore == 5 || cpuScore == 5) {
+            gameEnd();
+            } 
         };
 
-const playRound = function (playersChoice = button.value, cpuChoice = cpu) { 
+const playRound = function (playersChoice, cpuChoice = cpu) { 
  
    if (playersChoice == cpuChoice) {                                                // EVENT HANDLING WHEN OUTCOME IS A DRAW.
         setTimeout(() => {                                                          // display players choice.
@@ -68,13 +75,14 @@ const playRound = function (playersChoice = button.value, cpuChoice = cpu) {
                                 announcement.textContent = "YOU WON!"; 
                                 updatePlayerScore();
                                     setTimeout(()=> {
+                                    if (playerScore == 5) {return}
+                                    else {
                                     announcement.textContent = "Choose your weapon for your next battle"; 
-                                }, 1000)
-                            }, 500)
-                    }, 1000) 
-            }, 100)
-             
-                
+                                    }
+                                }, 1000);
+                            }, 500);
+                    }, 1000); 
+            }, 100);
 
             }
     else if ((playersChoice == "rock" && cpuChoice == "paper") ||                 // EVENT HANDLING WHEN PLAYER LOST
@@ -89,47 +97,52 @@ const playRound = function (playersChoice = button.value, cpuChoice = cpu) {
                                 announcement.textContent = "YOU LOST!"; 
                                 updateCpuScore();
                                 setTimeout(()=> {
-                                    announcement.textContent = "Chosse you weapon for your next battle"; 
-                                }, 1000)
-                            }, 500)
-                    }, 1000) 
-            }, 100)
+                                    if(cpuScore == 5) {return}
+                                    else {
+                                    announcement.textContent = "Choose your weapon for your next battle";
+                                }
+                                }, 1000);
+                            }, 500);
+                    }, 1000); 
+            }, 100);
         }
+         
     }
-    
-
-    
-     /*   while (playerScore && cpuScore < 5) {
-        playRound();
-    }    */
-
-    
-
 
 /////////////////////////
 ///////Events////////////
 ////////////////////////
 
 
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll("button");                                        // creates node-list of all buttons
 
     buttons.forEach(button => {
-        button.addEventListener("click",() => {
-            
+        button.addEventListener("click",() => {                                             // adds eventlistener "click" to each button and assigns 
+                                                                                            // the value of the button to the playerChoice variable
             let playersChoice = button.value;
             
-            let cpu = cpuChoice();
+            let cpu = cpuChoice();                                                              
             
             if (playerScore < 5 && cpuScore < 5) {
                 
-              playRound(playersChoice, cpu)
+              playRound(playersChoice, cpu)                                                 // runs the game as long score is not 5.
 
-            } else if (playerScore === 5 || cpuScore === 5) {
-                gameEnd()
-                };
-        
+            }
+           
+            
     });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
