@@ -1,13 +1,29 @@
 let playerScore = 0;
 let cpuScore = 0;
-        
+let announcement = document.querySelector(".announcement");
+
+
+///FUNCTION EXPRESSION I USE FOR THE GAME////   
+
+const gameEnd = function () {
+
+    if (playerScore == 5) {
+        setTimeout(()=>{
+            announcement.textContent = "YOU WON THE GAME";
+        }, 1000)
+    }  else if (cpuScore == 5) {
+        setTimeout(()=>{
+            announcement.textContent = "YOU LOST THE GAME";
+        }, 1000)
+    }
+}
         
 const cpuChoice = function () {
     const options = ["rock", "paper", "scissors"];
     const result = Math.floor(Math.random() * options.length);
     return options[result]
-   }
-
+   };
+   
 
 const updatePlayerScore = function () {
         const scoreBoardPlayer = document.querySelector(".playerScoreBoard .score");
@@ -22,71 +38,72 @@ const updateCpuScore = function () {
 
         };
 
-
-        const playRound = function playRound (playersChoice, cpuChoice) { 
-
-            let announcement = document.querySelector(".announcement");  
-                
-           if (playersChoice == cpuChoice) {                                                // EVENT HANDLING WHEN OUTCOME IS A DRAW.
-                setTimeout(() => {                                                          // display players choice.
-                    announcement.textContent = `You chose ${playersChoice}`;               
+const playRound = function (playersChoice = button.value, cpuChoice = cpu) { 
+ 
+   if (playersChoice == cpuChoice) {                                                // EVENT HANDLING WHEN OUTCOME IS A DRAW.
+        setTimeout(() => {                                                          // display players choice.
+            announcement.textContent = `You chose ${playersChoice}`;               
+                setTimeout(()=>{
+                    announcement.textContent = `CPU chose ${cpuChoice}`;             //display cpu choice.
                         setTimeout(()=>{
-                            announcement.textContent = `CPU chose ${cpuChoice}`;             //display cpu choice.
-                                setTimeout(()=>{
-                                    announcement.textContent = "It a draw!";                //display round outcome
+                            announcement.textContent = "It a draw!";                //display round outcome
+                            setTimeout(()=> {
+                                announcement.textContent = "Choose your weapon for your next battle"; 
+                            }, 1000)
+                        }, 500)
+
+                },1000)
+
+        }, 100) 
+   }
+   else if ((playersChoice == "rock" && cpuChoice == "scissors") ||                 // EVENT HANDLING WHEN PLAYER WINS
+            (playersChoice == "paper" && cpuChoice == "rock") || 
+            (playersChoice == "scissors" && cpuChoice == "paper")) {
+            
+            setTimeout(() =>{
+                announcement.textContent = `You chose ${playersChoice}`; 
+                    setTimeout(()=>{
+                        announcement.textContent = `CPU chose ${cpuChoice}`; 
+                            setTimeout(()=>{
+                                announcement.textContent = "YOU WON!"; 
+                                updatePlayerScore();
                                     setTimeout(()=> {
-                                        announcement.textContent = "Chosse you weapon for your next battle"; 
-                                    }, 850)
-                                }, 500)
+                                    announcement.textContent = "Choose your weapon for your next battle"; 
+                                }, 1000)
+                            }, 500)
+                    }, 1000) 
+            }, 100)
+             
+                
 
-                        },500)
-
-                }, 500) 
-           }
-           else if ((playersChoice == "rock" && cpuChoice == "scissors") ||                 // EVENT HANDLING WHEN PLAYER WINS
-                    (playersChoice == "paper" && cpuChoice == "rock") || 
-                    (playersChoice == "scissors" && cpuChoice == "paper")) {
-                    
-                    setTimeout(() =>{
-                        announcement.textContent = `You chose ${playersChoice}`; 
+            }
+    else if ((playersChoice == "rock" && cpuChoice == "paper") ||                 // EVENT HANDLING WHEN PLAYER LOST
+            (playersChoice == "paper" && cpuChoice == "scissors") || 
+            (playersChoice == "scissors" && cpuChoice == "rock")) {
+            
+            setTimeout(() =>{
+                announcement.textContent = `You chose ${playersChoice}`; 
+                    setTimeout(()=>{
+                        announcement.textContent = `CPU chose ${cpuChoice}`; 
                             setTimeout(()=>{
-                                announcement.textContent = `CPU chose ${cpuChoice}`; 
-                                    setTimeout(()=>{
-                                        announcement.textContent = "YOU WON!"; 
-                                        updatePlayerScore();
-                                            setTimeout(()=> {
-                                            announcement.textContent = "Chosse you weapon for your next battle"; 
-                                        }, 850)
-                                    }, 500)
-                            }, 1000) 
-                    }, 1000)
-                     
-                        
-
-                    }
-            else if ((playersChoice == "rock" && cpuChoice == "paper") ||                 // EVENT HANDLING WHEN PLAYER LOSES
-                    (playersChoice == "paper" && cpuChoice == "scissors") || 
-                    (playersChoice == "scissors" && cpuChoice == "rock")) {
-                    
-                    setTimeout(() =>{
-                        announcement.textContent = `You chose ${playersChoice}`; 
-                            setTimeout(()=>{
-                                announcement.textContent = `CPU chose ${cpuChoice}`; 
-                                    setTimeout(()=>{
-                                        announcement.textContent = "YOU LOST!"; 
-                                        updateCpuScore();
-                                        setTimeout(()=> {
-                                            announcement.textContent = "Chosse you weapon for your next battle"; 
-                                        }, 850)
-                                    }, 500)
-                            }, 1000) 
-                    }, 1000)
-                     
-                        
-
-                    }
-
+                                announcement.textContent = "YOU LOST!"; 
+                                updateCpuScore();
+                                setTimeout(()=> {
+                                    announcement.textContent = "Chosse you weapon for your next battle"; 
+                                }, 1000)
+                            }, 500)
+                    }, 1000) 
+            }, 100)
         }
+    }
+    
+
+    
+     /*   while (playerScore && cpuScore < 5) {
+        playRound();
+    }    */
+
+    
 
 
 /////////////////////////
@@ -96,15 +113,23 @@ const updateCpuScore = function () {
 
 const buttons = document.querySelectorAll("button");
 
-buttons.forEach(button => {
-    button.addEventListener("click",() => {
-        const playersChoice = button.value;
-        playRound(playersChoice, cpuChoice())
-      
+    buttons.forEach(button => {
+        button.addEventListener("click",() => {
+            
+            let playersChoice = button.value;
+            
+            let cpu = cpuChoice();
+            
+            if (playerScore < 5 && cpuScore < 5) {
+                
+              playRound(playersChoice, cpu)
+
+            } else if (playerScore === 5 || cpuScore === 5) {
+                gameEnd()
+                };
         
     });
-})
-    
+});
 
 
 
