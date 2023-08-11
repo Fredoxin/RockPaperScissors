@@ -2,25 +2,23 @@ let playerScore = 0;
 let cpuScore = 0;
         
         
-        
-        
-        
-        
-const cpuChoice = function randomSelection() {
+const cpuChoice = function () {
     const options = ["rock", "paper", "scissors"];
     const result = Math.floor(Math.random() * options.length);
     return options[result]
-          }
+   }
 
 
 const updatePlayerScore = function () {
         const scoreBoardPlayer = document.querySelector(".playerScoreBoard .score");
-        scoreBoardPlayer.textContent = `${playerScore}`
+        playerScore++;
+        scoreBoardPlayer.textContent = `${playerScore}`;
          };
 
 const updateCpuScore = function () {
         const scoreBoardPlayer = document.querySelector(".cpuScoreBoard .score");
-        scoreBoardPlayer.textContent = `${cpuScore}`
+        cpuScore++;
+        scoreBoardPlayer.textContent = `${cpuScore}`;
 
         };
 
@@ -29,6 +27,91 @@ const updateCpuScore = function () {
 
             let announcement = document.querySelector(".announcement");  
                 
+           if (playersChoice == cpuChoice) {                                                // EVENT HANDLING WHEN OUTCOME IS A DRAW.
+                setTimeout(() => {                                                          // display players choice.
+                    announcement.textContent = `You chose ${playersChoice}`;               
+                        setTimeout(()=>{
+                            announcement.textContent = `CPU chose ${cpuChoice}`;             //display cpu choice.
+                                setTimeout(()=>{
+                                    announcement.textContent = "It a draw!";                //display round outcome
+                                    setTimeout(()=> {
+                                        announcement.textContent = "Chosse you weapon for your next battle"; 
+                                    }, 850)
+                                }, 500)
+
+                        },500)
+
+                }, 500) 
+           }
+           else if ((playersChoice == "rock" && cpuChoice == "scissors") ||                 // EVENT HANDLING WHEN PLAYER WINS
+                    (playersChoice == "paper" && cpuChoice == "rock") || 
+                    (playersChoice == "scissors" && cpuChoice == "paper")) {
+                    
+                    setTimeout(() =>{
+                        announcement.textContent = `You chose ${playersChoice}`; 
+                            setTimeout(()=>{
+                                announcement.textContent = `CPU chose ${cpuChoice}`; 
+                                    setTimeout(()=>{
+                                        announcement.textContent = "YOU WON!"; 
+                                        updatePlayerScore();
+                                            setTimeout(()=> {
+                                            announcement.textContent = "Chosse you weapon for your next battle"; 
+                                        }, 850)
+                                    }, 500)
+                            }, 1000) 
+                    }, 1000)
+                     
+                        
+
+                    }
+            else if ((playersChoice == "rock" && cpuChoice == "paper") ||                 // EVENT HANDLING WHEN PLAYER LOSES
+                    (playersChoice == "paper" && cpuChoice == "scissors") || 
+                    (playersChoice == "scissors" && cpuChoice == "rock")) {
+                    
+                    setTimeout(() =>{
+                        announcement.textContent = `You chose ${playersChoice}`; 
+                            setTimeout(()=>{
+                                announcement.textContent = `CPU chose ${cpuChoice}`; 
+                                    setTimeout(()=>{
+                                        announcement.textContent = "YOU LOST!"; 
+                                        updateCpuScore();
+                                        setTimeout(()=> {
+                                            announcement.textContent = "Chosse you weapon for your next battle"; 
+                                        }, 850)
+                                    }, 500)
+                            }, 1000) 
+                    }, 1000)
+                     
+                        
+
+                    }
+
+        }
+
+
+/////////////////////////
+///////Events////////////
+////////////////////////
+
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+    button.addEventListener("click",() => {
+        const playersChoice = button.value;
+        playRound(playersChoice, cpuChoice())
+      
+        
+    });
+})
+    
+
+
+
+
+       
+           /*
+           
             if (playersChoice == "Rock") {
    
                 announcement.innerText = "You chose rock";    
@@ -46,6 +129,7 @@ const updateCpuScore = function () {
                 }, 2500)
                 }
                 else if (cpuChoice == "paper") {
+                    
                     setTimeout(() => { 
                         announcement.innerText = "Computer chose paper";
                     }, 1500);        
@@ -172,13 +256,11 @@ const updateCpuScore = function () {
         
                             setTimeout(() => { 
                                 announcement.innerText = "draw!";
-                            }, 2500); 
-        
-                            
+                            }, 2500);   
                             }}}
                         
                     
-
+*/
 
                     
 
@@ -207,30 +289,6 @@ const updateCpuScore = function () {
             
                  } 
         */
-     
-
-
-/////////////////////////
-///////Events////////////
-////////////////////////
-
-
-const buttons = document.querySelectorAll("button");
-
-buttons.forEach(button => {
-    button.addEventListener("click",() => {
-        const playersChoice = button.value;
-        const result = playRound(playersChoice, cpuChoice())
-      
-        
-    });
-})
-    
-
-
-
-
-
 
 
 
