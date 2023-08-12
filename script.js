@@ -11,12 +11,17 @@ const gameEnd = function () {
         setTimeout(()=>{
             
             announcement.textContent = "YOU WON THE GAME";
+            setTimeout(()=>{
+                showEndingScreen()
+            }, 2000)
         }, 500)
     }  else if (cpuScore == 5) {
         setTimeout(()=>{
             
             announcement.textContent = "YOU LOST THE GAME";
-
+            setTimeout(()=>{
+                showEndingScreen()
+            }, 2000)
         }, 500)
     }
 };
@@ -152,21 +157,50 @@ function disableButtons () {                // DISABLES AND ENABLES THE BUTTON F
 
 
 
+function showEndingScreen () {
+    const allElements = document.querySelectorAll("body *");
+    
+    allElements.forEach(element => {
+        element.classList.add("hide")
 
 
-
-// you can disable buttons with button.diabled.
-// find a method that allowes execution for a certain amount of time.
-// write a function that set disables atributes of all button to disabled true and after 4 seconcd sets it on false again
-
-/*
-function blockButtons () {
-    console.log()
-    buttons.forEach(button =>{
-    button.removeEventListener("click", addEvent)
-})
+    })
+    createPara()
+    setTimeout(()=>{
+        createPlayAgainButton()
+    }, 2500)
 }
-*/
+
+function createPara () {
+    const para = document.createElement("p");
+    const body = document.querySelector("body");
+    para.textContent = "Thank you for playing";
+    para.classList.add("center", "stylingThankYou");
+    body.appendChild(para);
+    
+
+}
+const playAgainButton = document.createElement("button")
+
+function createPlayAgainButton () {
+    
+    const body = document.querySelector("body");
+
+    playAgainButton.textContent = "Play again";
+    playAgainButton.classList.add("playAgainButtonStyling")
+    body.appendChild(playAgainButton);
+
+}
+
+
+
+
+playAgainButton.addEventListener("click", () => {
+    window.location.reload()
+})
+
+
+
 
      // NOTES got later
 

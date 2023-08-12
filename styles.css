@@ -116,3 +116,43 @@ bottom: 10%;
 
 
 }
+
+
+
+.hide {
+
+   display: none !important;
+   
+}
+
+.center {
+    position: absolute;
+    top: 33%;
+    bottom: 33%;
+    left: 33%;
+    right: 33%;
+
+    
+}
+
+
+.stylingThankYou {
+
+    font-size: 3rem;
+    letter-spacing: 10px;
+    animation-duration: 500;
+}
+
+.playAgainButtonStyling {
+
+    width: fit-content;
+    height: fit-content;
+    font-size: 2rem;
+    position: absolute;
+    top: 60%;
+    bottom: 20%;
+    left: 45%;
+    right: 45%;
+    background-color: transparent;
+    border: 1px solid;
+}
