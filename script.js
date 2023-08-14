@@ -6,8 +6,8 @@ let announcement = document.querySelector(".announcement");
 ///FUNCTION EXPRESSION I USE FOR THE GAME////   
 
 const gameEnd = function () {
-
-    if (playerScore == 5) {
+                                                                            //Ends the game. invokes showEndingScreen() which is declared at the
+    if (playerScore == 5) {                                                 // bottom which creates ending screen and playagain button
         setTimeout(()=>{
             
             announcement.textContent = "YOU WON THE GAME";
@@ -26,14 +26,14 @@ const gameEnd = function () {
     }
 };
         
-const cpuChoice = function () {
+const cpuChoice = function () {                                             // random selection for cpu
     const options = ["rock", "paper", "scissors"];
     const result = Math.floor(Math.random() * options.length);
     return options[result]
    };
    
 
-const updatePlayerScore = function () {
+const updatePlayerScore = function () {                                                     // updates player score and calls gameEnd when score reaches 5
         const scoreBoardPlayer = document.querySelector(".playerScoreBoard .score");
         playerScore++;
         scoreBoardPlayer.textContent = `${playerScore}`;
@@ -42,7 +42,7 @@ const updatePlayerScore = function () {
             } 
          };
 
-const updateCpuScore = function () {
+const updateCpuScore = function () {                                                       // updates cpu score and calls gameEnd when score reaches 5
         const scoreBoardPlayer = document.querySelector(".cpuScoreBoard .score");
         cpuScore++;
         scoreBoardPlayer.textContent = `${cpuScore}`;
@@ -51,17 +51,17 @@ const updateCpuScore = function () {
             } 
         };
 // THE GAME
-const playRound = function (playersChoice, cpuChoice = cpu) { 
+const playRound = function (playersChoice, cpuChoice = cpu) {                        // main game logic
  
    if (playersChoice == cpuChoice) {                                                // EVENT HANDLING WHEN OUTCOME IS A DRAW.
-        setTimeout(() => {                                                          // displays players choice.
-            announcement.textContent = `You chose ${playersChoice}`;               
+        setTimeout(() => {                                                         
+            announcement.textContent = `You chose ${playersChoice}`;                 // displays players choice.    
                 setTimeout(()=>{
                     announcement.textContent = `CPU chose ${cpuChoice}`;             //displays cpu choice.
                         setTimeout(()=>{
                             announcement.textContent = "It a draw!";                //display round outcome
                             setTimeout(()=> {
-                                announcement.textContent = "Choose your weapon for your next battle"; 
+                                announcement.textContent = "Choose your weapon for your next battle"; // indicates the game is ready for the next round
                             }, 1500)
                         }, 1200)
 
@@ -70,11 +70,11 @@ const playRound = function (playersChoice, cpuChoice = cpu) {
         }, 100) 
    }
    else if ((playersChoice == "rock" && cpuChoice == "scissors") ||                 // EVENT HANDLING WHEN PLAYER WINS
-            (playersChoice == "paper" && cpuChoice == "rock") || 
-            (playersChoice == "scissors" && cpuChoice == "paper")) {
+            (playersChoice == "paper" && cpuChoice == "rock") ||                    // winning conditions
+            (playersChoice == "scissors" && cpuChoice == "paper")) {                //
             
             setTimeout(() =>{
-                announcement.textContent = `You chose ${playersChoice}`; 
+                announcement.textContent = `You chose ${playersChoice}`;            // feedback
                     setTimeout(()=>{
                         announcement.textContent = `CPU chose ${cpuChoice}`; 
                             setTimeout(()=>{
@@ -96,7 +96,7 @@ const playRound = function (playersChoice, cpuChoice = cpu) {
             (playersChoice == "scissors" && cpuChoice == "rock")) {
             
             setTimeout(() =>{
-                announcement.textContent = `You chose ${playersChoice}`; 
+                announcement.textContent = `You chose ${playersChoice}`;          // feeback
                     setTimeout(()=>{
                         announcement.textContent = `CPU chose ${cpuChoice}`; 
                             setTimeout(()=>{
@@ -115,9 +115,9 @@ const playRound = function (playersChoice, cpuChoice = cpu) {
          
     }
 
-/////////////////////////
-///////Events////////////
-////////////////////////
+
+//          Gaming button events                //////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 const buttons = document.querySelectorAll("button");                                        // creates node-list of all buttons
@@ -155,7 +155,9 @@ function disableButtons () {                // DISABLES AND ENABLES THE BUTTON F
 
 }
 
-
+//                                                                            //////////////////////////////////////////////////////////
+// HERE IS WHAT HAPPENS WHEN GAME HAS ENDED. EXECUTED IN gameEnd function.
+//                                                                             /////////////////////////////////////////////////////////
 
 function showEndingScreen () {
     const allElements = document.querySelectorAll("body *");
@@ -171,7 +173,7 @@ function showEndingScreen () {
     }, 2500)
 }
 
-function createPara () {
+function createPara () {     
     const para = document.createElement("p");
     const body = document.querySelector("body");
     para.textContent = "Thank you for playing";
@@ -180,6 +182,7 @@ function createPara () {
     
 
 }
+
 const playAgainButton = document.createElement("button")
 
 function createPlayAgainButton () {
@@ -189,18 +192,20 @@ function createPlayAgainButton () {
     playAgainButton.textContent = "Play again";
     playAgainButton.classList.add("playAgainButtonStyling")
     body.appendChild(playAgainButton);
+    restartGame()
 
 }
 
 
 
-
+function restartGame () {
 playAgainButton.addEventListener("click", () => {
     window.location.reload()
 })
-
-
-
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
      // NOTES got later
 
